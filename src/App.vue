@@ -2,38 +2,28 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        <span>I am bored</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>fas fa-external-link-alt</v-icon>
+      <v-btn flat @click="$store.dispatch('fetchRandom')">
+        <span class="mr-2">Random</span>
+        <v-icon>fas fa-random</v-icon>
       </v-btn>
     </v-toolbar>
 
     <v-content>
-      <HelloWorld/>
+      <Activity />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import Activity from './components/Activity'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  },
-  data () {
-    return {
-      //
-    }
+    Activity
   }
 }
 </script>
