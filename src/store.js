@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
 
 Vue.use(Vuex);
 
@@ -11,8 +10,7 @@ const config = {
   mode: "cors"
 };
 
-const toTitleCase = text =>
-  `${text[0].toUpperCase()}${text.substring(1, text.length)}`;
+const toTitleCase = text => `${text[0].toUpperCase()}${text.substring(1, text.length)}`;
 
 export default new Vuex.Store({
   state: {
@@ -33,7 +31,7 @@ export default new Vuex.Store({
           context.state.activity = data.activity;
           context.state.search.type = toTitleCase(data.type);
           context.state.search.participants = data.participants;
-          context.state.search.price = [data.price, 1.0];
+          context.state.search.price = data.price
         });
     },
     fetchActivity(context, payload) {
@@ -41,14 +39,15 @@ export default new Vuex.Store({
         Object.assign(context.state.search, payload);
       }
 
-      var path =
-        `${api}?` +
-        [
-          `participants=${context.state.search.participants}`,
-          `type=${context.state.search.type.toLowerCase()}`,
-          `minprice=${context.state.search.price}`,
-          `maxprice=1.0`
-        ].join("&");
+      var path = `${api}?` + [
+        `participants=${context.state.search.participants}`, `type=${context
+          .state
+          .search
+          .type
+          .toLowerCase()}`,
+        `minprice=${context.state.search.price}`,
+        `maxprice=1.0`
+      ].join("&");
 
       fetch(path, config)
         .then(response => response.json())
