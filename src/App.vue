@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import Activity from './components/Activity'
+import Activity from "./components/Activity";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Activity
   }
-}
+};
 </script>

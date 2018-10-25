@@ -99,8 +99,8 @@
           Price: {{$store.state.search.price | humanFriendly}}
         </p>
 
-        <v-slider v-model="$store.state.search.price"  :max="1" :min="0" :step="0.1" :ticks="true" @end="$store.dispatch('fetchActivity')" >
-<v-icon slot="prepend" @click="decreasePrice">
+        <v-slider v-model="$store.state.search.price" :max="1" :min="0" :step="0.1" :ticks="true" @end="$store.dispatch('fetchActivity')">
+          <v-icon slot="prepend" @click="decreasePrice">
             fas fa-minus
           </v-icon>
 
@@ -118,26 +118,38 @@
 
 <script>
 export default {
-  methods:{
-    decreasePrice(event){
-      if(this.$store.state.search.price>0)
-      this.$store.dispatch('fetchActivity',{price:this.$store.state.search.price-.1})
-    },    increasePrice(event){
-      if(this.$store.state.search.price<1)
-      this.$store.dispatch('fetchActivity',{price:this.$store.state.search.price+.1})
-    },decreaseParticipants(event){
-      if(this.$store.state.search.participants>0)
-      this.$store.dispatch('fetchActivity',{participants:this.$store.state.search.participants-1})
-    },    increaseParticipants(event){
-      if(this.$store.state.search.participants<10)
-      this.$store.dispatch('fetchActivity',{participants:this.$store.state.search.participants+1})
+  methods: {
+    decreasePrice() {
+      if (this.$store.state.search.price > 0)
+        this.$store.dispatch("fetchActivity", {
+          price: this.$store.state.search.price - 0.1
+        });
+    },
+    increasePrice() {
+      if (this.$store.state.search.price < 1)
+        this.$store.dispatch("fetchActivity", {
+          price: this.$store.state.search.price + 0.1
+        });
+    },
+    decreaseParticipants() {
+      if (this.$store.state.search.participants > 0)
+        this.$store.dispatch("fetchActivity", {
+          participants: this.$store.state.search.participants - 1
+        });
+    },
+    increaseParticipants() {
+      if (this.$store.state.search.participants < 10)
+        this.$store.dispatch("fetchActivity", {
+          participants: this.$store.state.search.participants + 1
+        });
     }
   },
   mounted() {
     this.$store.dispatch("fetchRandom");
-  },filters:{
-    humanFriendly(value){
-      return value < .3 ? "Cheap" : value < .7 ? "Moderate" : "Expensive";
+  },
+  filters: {
+    humanFriendly(value) {
+      return value < 0.3 ? "Cheap" : value < 0.7 ? "Moderate" : "Expensive";
     }
   }
 };
